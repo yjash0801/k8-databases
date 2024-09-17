@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: web
+  labels: #these labels are deployment labels
+    app:  mongodb
+    project: mechanoidstore
+    tier: db
+spec:
+  selector:
+    matchLabels:
+      app:  mongodb
+      project: mechanoidstore
+      tier: db
+  serviceName: "mongodb"
+  replicas: {{ .Values.statefulset.replicas }}
+  template:
+    metadata:
+      labels:
+        app:  mongodb
+        project: mechanoidstore
+        tier: db
+    spec:
+      containers:
+      - name: mongodb
+        image: "jashwanth5668/mongodb:{{ .Values.statefulset.imageVersion }}"
+        volumeMounts:
+        - name: mongodb
+          mountPath: /data/db
+  volumeClaimTemplates:
+  - metadata:
+      name: mongodb
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      storageClassName: "ebs-sc"
+      resources:
+        requests:
+          storage: 1Gi
