@@ -36,9 +36,9 @@ spec:
   volumeClaimTemplates:
   - metadata:
       name:  mysql
-      spec:
-        accessModes: [ "ReadWriteOnce" ]
-        storageClassName: "ebs-sc"
-        resources:
-          requests:
-            storage: 2Gi
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      storageClassName: "ebs-sc"
+      resources:
+        requests:
+          storage: 2Gi
