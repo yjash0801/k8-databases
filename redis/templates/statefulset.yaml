@@ -23,11 +23,11 @@ spec:
         tier: db
     spec:
       containers:
-        - name:  redis
-          image:  redis
-          volumeMounts:
-          - name: redis
-            mountPath: /data
+      - name:  redis
+        image:  redis
+        volumeMounts:
+        - name: redis
+          mountPath: /data
   volumeClaimTemplates:
   - metadata:
       name: redis
