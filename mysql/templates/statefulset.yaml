@@ -13,7 +13,7 @@ spec:
       app: mysql
       project: mechanoidstore
       tier: db
-  serviceName: mysql
+  serviceName: "mysql"
   replicas: {{ .Values.statefulset.replicas }}
   template:
     metadata:
