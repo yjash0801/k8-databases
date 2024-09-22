@@ -1,0 +1,39 @@
+apiVersion: v1
+kind: StatefulSet
+metadata:
+  name: redis
+  namespace: mechanoidstore
+  labels:
+    app: redis
+    project: mechanoidstore
+    tier: db
+spec:
+  selector:
+    matchLabels:
+      app: redis
+      project: mechanoidstore
+      tier: db
+  serviceName:  "redis"
+  replicas: {{ .Values.statefulset.replicas }}
+  template:
+    metadata:
+      labels:
+        app: redis
+        project: mechanoidstore
+        tier: db
+    spec:
+      containers:
+        - name:  redis
+          image:  redis
+          volumeMounts:
+          - name: redis
+            mountPath: /data
+  volumeClaimTemplates:
+  - metadata:
+      name: redis
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      storageClassName: "ebs-sc"
+      resources:
+        requests:
+          storage: 1Gi

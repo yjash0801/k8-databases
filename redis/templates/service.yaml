@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: redis
+  namespace: mechanoidstore
+  labels:
+    app:  redis
+    project: mechanoidstore
+    tier: db
+spec:
+  ports:
+  - protocol:  TCP
+    port:  6379
+    targetPort:  6379
+  clusterIP: None
+  selector:
+    app:  redis
+    project: mechanoidstore
+    tier: db
