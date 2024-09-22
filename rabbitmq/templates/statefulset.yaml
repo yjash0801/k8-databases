@@ -23,8 +23,8 @@ spec:
         tier: db
     spec:
       containers:
-      - name: myapp
-        image: "jashwanth5668/rabbitmq:{{ .Values.statefulset.imageVersion }}"
+      - name: rabbitmq
+        image: rabbitmq
         envFrom:
         - secretRef:
             name: rabbitmq
