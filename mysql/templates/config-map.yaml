@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mysql
+  namespace: mechanoidstore
+data:
+  MYSQL_DATABASE: "cities"

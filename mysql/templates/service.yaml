@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: mysql
+  namespace: mechanoidstore
+  labels:
+    app:  mysql
+    project: mechanoidstore
+    tier: db
+spec:
+  ports:
+  - protocol:  TCP
+    port:  3306
+    targetPort:  3306
+  clusterIP: None
+  selector:
+    app:  mysql
+    project: mechanoidstore
+    tier: db

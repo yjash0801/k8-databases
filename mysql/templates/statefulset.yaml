@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: mysql
+  namespace: mechanoidstore
+  labels:
+    app: mysql
+    project: mechanoidstore
+    tier: db
+spec:
+  selector:
+    matchLabels:
+      app: mysql
+      project: mechanoidstore
+      tier: db
+  serviceName: mysql
+  replicas: {{ .Values.statefulset.replicas }}
+  template:
+    metadata:
+      labels:
+        app: mysql
+        project: mechanoidstore
+        tier: db
+    spec:
+      containers:
+      - name:  mysql
+        image:  "jashwanth5668/mysql:{{ .Values.statefulset.imageVersion }}"
+        envFrom:
+        - configMapRef:
+            name:  mysql
+        - secretRef:
+            name: mysql
+        volumeMounts:
+        - name:  mysql
+          mountPath:  /var/lib/mysql
+  volumeClaimTemplates:
+  - metadata:
+      name:  mysql
+      spec:
+        accessModes: [ "ReadWriteOnce" ]
+        storageClassName: "ebs-sc"
+        resources:
+          requests:
+            storage: 2Gi
