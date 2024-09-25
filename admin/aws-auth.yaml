@@ -11,6 +11,10 @@ data:
       - mechanoidstore-pod-reader
       userarn: arn:aws:iam::767397825598:user/Srimaan
       username: Srimaan
+    - groups:
+      - mechanoidstore-admin
+      userarn: arn:aws:iam::767397825598:user/Ravi
+      username: Ravi
 kind: ConfigMap
 metadata:
   name: aws-auth
