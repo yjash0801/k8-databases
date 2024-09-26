@@ -1,29 +1,29 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name:  catalogue
+  name:  user
   namespace: mechanoidstore
   labels: #these labels are deployment labels
-    app:  catalogue
+    app:  user
     project: mechanoidstore
     tier: app
 spec:
   replicas: {{ .Values.deployment.replicas }}
   selector:
     matchLabels: #these labels are used to find the pods
-      app:  catalogue
+      app:  user
       project: mechanoidstore
       tier: app
   template:
     metadata:
       labels: #these are pod labels
-        app:  catalogue
+        app:  user
         project: mechanoidstore
         tier: app
     spec:
       containers:
-      - name: catalogue
-        image:  "jashwanth5668/catalogue:{{ .Values.deployment.imageVersion }}"
+      - name: user
+        image:  "jashwanth5668/user:{{ .Values.deployment.imageVersion }}"
         imagePullPolicy: Always
         resources:
           requests:
@@ -34,4 +34,4 @@ spec:
             memory: "256Mi"
         envFrom:
         - configMapRef:
-            name:  catalogue
+            name:  user
